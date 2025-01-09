@@ -50,9 +50,9 @@ void __attribute__((section(".text.entry"))) kmain() {
     int inc = 0;
     for (int i = 0;; i++) {
         for (int j = 0; j < HEIGHT; j++) {
-            int col_id = (j + inc) % cols_count;
-            if (j / cols_count % 2) {
-                col_id = cols_count - 1 - col_id;
+            int col_id = (j + inc) % (cols_count * 2 - 1);
+            if (col_id >= cols_count) {
+                col_id -= cols_count;
             }
             vmem_id += 17;
             print_str("\"hello, world\" from kernel!(azaza lol kek)", colors[col_id]);
